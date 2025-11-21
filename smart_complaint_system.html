@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Portal Pengaduan Warga Cerdas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        /* HEADER */
+        .header {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* STATS CARDS */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 25px 35px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* MAIN CONTAINER */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FORM CARD */
+        .card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 35px;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .card-header-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* FORM ELEMENTS */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+
+        /* SUBMIT BUTTON */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-submit.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* RESULT CARD */
+        .result-container {
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+
+        .result-header.urgent {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 159, 67, 0.2));
+        }
+
+        .result-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .result-header.urgent .result-icon {
+            background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+        }
+
+        .result-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .result-header p {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .result-details {
+            display: grid;
+            gap: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            border-left: 3px solid #667eea;
+        }
+
+        .result-item.urgent-item {
+            border-left-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .result-item-label {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .result-item-value {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+        }
+
+        .badge-danger {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🏛️</div>
+                <div class="logo-text">
+                    <h1>Smart Complaint</h1>
+                    <span>Sistem Pengaduan AI</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Beranda</a>
+                <a href="#"><i class="fas fa-list"></i> Lacak Laporan</a>
+                <a href="#"><i class="fas fa-chart-bar"></i> Statistik</a>
+                <a href="#"><i class="fas fa-info-circle"></i> Tentang</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h2>Laporkan Keluhan Anda dengan Mudah</h2>
+        <p>Sistem berbasis AI yang secara otomatis menganalisis dan meneruskan laporan Anda ke dinas terkait. Cepat, akurat, dan transparan.</p>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <i class="fas fa-file-alt"></i>
+            <h3>1,234</h3>
+            <p>Total Laporan</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-check-circle"></i>
+            <h3>1,089</h3>
+            <p>Terselesaikan</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <h3>2.5 Hari</h3>
+            <p>Rata-rata Respon</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-robot"></i>
+            <h3>98%</h3>
+            <p>Akurasi AI</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        
+        <!-- FORM CARD -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon">📝</div>
+                <div>
+                    <h3>Buat Laporan Baru</h3>
+                    <p>Isi formulir di bawah dengan lengkap</p>
+                </div>
+            </div>
+
+            <form id="formLaporan">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i>Nama Lengkap</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i>Nomor WhatsApp</label>
+                    <input type="tel" id="kontak" placeholder="08xxxxxxxxxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i>Lokasi Kejadian</label>
+                    <input type="text" id="lokasi" placeholder="Contoh: Jl. Sudirman No. 10" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-edit"></i>Isi Laporan</label>
+                    <textarea id="isiLaporan" placeholder="Jelaskan keluhan Anda secara detail..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnSubmit">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Kirim Laporan</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- RESULT CARD -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-header-icon">🤖</div>
+                <div>
+                    <h3>Hasil Analisis AI</h3>
+                    <p>Laporan akan diproses secara otomatis</p>
+                </div>
+            </div>
+
+            <div class="result-container" id="resultContainer">
+                <div class="result-header" id="resultHeader">
+                    <div class="result-icon" id="resultIcon">✅</div>
+                    <div>
+                        <h4 id="resultTitle">Laporan Berhasil Dikirim!</h4>
+                        <p id="resultSubtitle">Sedang diproses oleh sistem</p>
+                    </div>
+                </div>
+
+                <div class="result-details">
+                    <div class="result-item">
+                        <span class="result-item-label">No. Tiket</span>
+                        <span class="result-item-value" id="tiketId">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-item-label">Waktu Lapor</span>
+                        <span class="result-item-value" id="waktuLapor">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-item-label">Diteruskan ke</span>
+                        <span class="result-item-value" id="disposisi">-</span>
+                    </div>
+                    <div class="result-item" id="urgensiItem">
+                        <span class="result-item-label">Tingkat Urgensi</span>
+                        <span class="badge badge-success" id="urgensi">Normal</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="placeholder" style="text-align:center; padding:60px 20px; color:#666;">
+                <i class="fas fa-inbox" style="font-size:4rem; margin-bottom:20px; opacity:0.3;"></i>
+                <p>Hasil analisis akan muncul di sini setelah Anda mengirim laporan</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2024 Smart Complaint System | Dibuat dengan berbasis AI</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // GANTI URL INI dengan URL ngrok Anda!
+        const API_URL = "https://supercordial-jacquetta-unsociably.ngrok-free.dev";
+
+        document.getElementById('formLaporan').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('btnSubmit');
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+
+            const data = {
+                nama_pelapor: document.getElementById('nama').value,
+                isi_laporan: document.getElementById('isiLaporan').value,
+                lokasi: document.getElementById('lokasi').value,
+                kontak: document.getElementById('kontak').value
+            };
+
+            try {
+                const response = await fetch(API_URL + '/api/lapor', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                
+                // Tampilkan hasil
+                document.getElementById('placeholder').style.display = 'none';
+                document.getElementById('resultContainer').classList.add('show');
+                
+                document.getElementById('tiketId').textContent = result.tiket_id;
+                document.getElementById('waktuLapor').textContent = result.waktu_lapor;
+                document.getElementById('disposisi').textContent = result.analisis_ai.disposisi_ke;
+                
+                const urgensiEl = document.getElementById('urgensi');
+                const headerEl = document.getElementById('resultHeader');
+                const iconEl = document.getElementById('resultIcon');
+                const urgensiItem = document.getElementById('urgensiItem');
+                
+                if (result.analisis_ai.kategori_bahaya) {
+                    urgensiEl.textContent = 'URGENT!';
+                    urgensiEl.className = 'badge badge-danger';
+                    headerEl.classList.add('urgent');
+                    iconEl.textContent = '🚨';
+                    urgensiItem.classList.add('urgent-item');
+                    document.getElementById('resultTitle').textContent = 'LAPORAN DARURAT!';
+                    document.getElementById('resultSubtitle').textContent = 'Prioritas tinggi - segera ditangani';
+                } else {
+                    urgensiEl.textContent = 'Normal';
+                    urgensiEl.className = 'badge badge-success';
+                    headerEl.classList.remove('urgent');
+                    iconEl.textContent = '✅';
+                    urgensiItem.classList.remove('urgent-item');
+                    document.getElementById('resultTitle').textContent = 'Laporan Berhasil Dikirim!';
+                    document.getElementById('resultSubtitle').textContent = result.pesan_untuk_user;
+                }
+
+                // Reset form
+                document.getElementById('formLaporan').reset();
+
+            } catch (error) {
+                alert('Gagal mengirim laporan. Pastikan server backend berjalan!');
+                console.error(error);
+            }
+
+            btn.classList.remove('loading');
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Laporan';
+        });
+    </script>
+
+</body>
+</html>
